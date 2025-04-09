@@ -1,0 +1,131 @@
+@use 'variaveis' as *;
+
+.footer {
+  width: 100%;
+  height: auto;
+  min-height: 64px;
+  background-color: $obsidian;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 16px;
+  gap: 16px;
+  flex-wrap: wrap;
+  overflow-y: hidden;
+
+  p {
+    font-family: 'poppins';
+    font-size: 14px;
+    color: $branco-texto;
+  }
+
+  &__assinatura {
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 8px;
+
+    &__glitch {
+      text-decoration: none;
+      color: $branco-texto;
+      font-family: "poppins";
+      position: relative;
+      font-size: 16px;
+      font-weight: 700;
+      line-height: 1.2;
+      letter-spacing: 2px;
+      animation: shift 1s ease-in-out infinite alternate;
+      z-index: 1;
+
+      &::before,
+      &::after {
+        display: block;
+        content: attr(data-glitch);
+        position: absolute;
+        top: 0;
+        left: 0;
+        opacity: 0.8;
+      }
+
+      &::before {
+        animation: glitch 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) both infinite;
+        color: $amarelo-claro;
+        z-index: -1;
+      }
+      &::after {
+        animation: glitch 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) reverse both infinite;
+        color: $azul-destaque;
+        z-index: -2;
+      }
+    }
+
+
+
+  }
+}
+
+
+@keyframes glitch {
+  0% {
+    transform: translate(0);
+  }
+
+  20% {
+    transform: translate(-3px, 3px);
+  }
+
+  40% {
+    transform: translate(-3px, -3px);
+  }
+
+  60% {
+    transform: translate(3px, 3px);
+  }
+
+  80% {
+    transform: translate(3px, -3px);
+  }
+
+  to {
+    transform: translate(0);
+  }
+}
+
+@keyframes shift {
+  0%, 40%, 44%, 58%, 61%, 65%, 69%, 73%, 100% {
+    transform: skewX(0deg);
+  }
+
+  41% {
+    transform: skewX(5deg);
+  }
+
+  42% {
+    transform: skewX(-5deg);
+  }
+
+  59% {
+    transform: skewX(20deg) skewY(5deg);
+  }
+
+  60% {
+    transform: skewX(-20deg) skewY(-5deg);
+  }
+
+  63% {
+    transform: skewX(5deg) skewY(-5deg);
+  }
+
+  70% {
+    transform: skewX(-25deg) skewY(-10deg);
+  }
+
+  71% {
+    transform: skewX(5deg) skewY(-5deg);
+  }
+}
