@@ -1,0 +1,113 @@
+@use 'variaveis' as *;
+
+.patoImg {
+  width: 300px;
+  height: auto;
+  perspective: 1000px;
+
+  &__bg {
+    fill: none;
+  }
+
+  &__sombra {
+    fill: #f2f2f2;
+  }
+  &__balao {
+    display: none;
+  }
+
+  .patoImg__balao__bg, 
+  .patoImg__balao__bgShadow,
+  .patoImg__balao__quack {
+    transition: all 0.3s ease;
+  }
+
+  // #olho-globo,
+  .patoImg__olho__globo {
+    transform-origin: center center;
+    animation: blink 10s ease infinite;
+  }
+
+  .patoImg__corpo__asa,
+  .patoImg__corpo__asa__borda {
+    transform-origin: center right;
+    animation: asa 10s ease infinite;
+  }
+
+
+}
+
+@keyframes asa {
+  0% {
+    transform: skew('0deg');
+  }
+  40% {
+    transform: skew('45deg');
+  }
+  60% {
+    transform: skew('-45deg');
+  }
+  100% {
+    transform: skew('0deg');
+  }
+}
+
+
+@keyframes blink {
+
+  0%,
+  3% {
+    transform: translate(0, 0) scaleY(0.3);
+  }
+
+  7% {
+    transform: translate(0, 0) scaleY(1);
+  }
+
+  25% {
+    transform: translate(0, 10px) scaleY(1);
+  }
+
+  30% {
+    transform: translate(0, 0) scaleY(1);
+  }
+
+  35% {
+    transform: translate(0, 0) scaleY(0.3);
+  }
+
+
+  40% {
+    transform: translate(0, 0) scaleY(1);
+  }
+
+  50% {
+    transform: translate( 0, -10px) scaleY(1);
+  }
+
+  60% {
+    transform: translate(0, 0) scaleY(1);
+  }
+
+  65% {
+    transform: translate(0, 0) scaleY(0.3);
+  }
+
+
+  70% {
+    transform: translate(0, 0) scaleY(1);
+  }
+
+  80% {
+    transform: translate(10px, -10px) scaleY(1);
+  }
+
+  90% {
+    transform: translate(0, 0) scaleY(1);
+  }
+
+  98%,
+  100% {
+    transform: translate(0, 0) scaleY(0.3);
+  }
+}
