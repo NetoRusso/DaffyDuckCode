@@ -3,37 +3,22 @@ import Pato from "../Pato";
 import style from "./BoxLeft.module.scss";
 import pena from "../../assets/svg/pena.svg";
 import Image from "next/image";
-import { useContext } from "react";
-import { QuackContext } from "@/context/quack";
-// import { TaskContext } from "@/context/task";
-
-
-
-
+import { useRef } from "react";
+import { useQuack } from "@/hooks/useQuack";
 
 const BoxLeft = () => {
-
-  const { setFalando, setHistorico, historico } = useContext(QuackContext);
-
-
-  const chamaIa = async (texto: string) => {
-    const res = await fetch("/api/groq", {
-      method: "POST",
-      headers: {"Content-Type": "application/json"},
-      body: JSON.stringify({ mensagem: texto }),
-    });
-    const data = await res.json();
-    const conteudo = data.choices[0]?.message?.content;
-    // console.log("Resposta do Groq:", data.choices[0]?.message?.content);
-    setHistorico([...historico, { pergunta: texto, resposta: conteudo }]);
-  };
-
+  const { chamaIa } = useQuack();
+  const formRef = useRef<HTMLFormElement | null>(null);
 
   return (
     <div className={style.box}>
       <div className={style.box__content}>
-        <Pato />
+        <div onClick={() => formRef.current?.requestSubmit()} style={{ cursor: "pointer" }}>
+          <Pato />
+        </div>
+
         <form
+          ref={formRef}
           className={style.box__content__form}
           action="submit"
           onSubmit={async (e) => {
@@ -42,12 +27,8 @@ const BoxLeft = () => {
             const task = form.querySelector("#task") as HTMLTextAreaElement;
 
             if (task.value.length > 3) {
-              setFalando(true);
               await chamaIa(task.value);
               form.reset();
-              setTimeout(() => {
-                setFalando(false);
-              }, 3000);
             }
           }}
         >
@@ -73,8 +54,8 @@ const BoxLeft = () => {
           </button>
         </form>
       </div>
-    </div >
-  )
-}
+    </div>
+  );
+};
 
 export default BoxLeft;

@@ -1,6 +1,6 @@
 'use client';
 
-import { createContext, useState } from "react";
+import { createContext, useState, useEffect } from "react";
 
 type Mensagem = {
   pergunta: string;
@@ -19,6 +19,13 @@ const QuackContext = createContext<QuackContextType>({} as QuackContextType);
 const QuackProvider = ({ children }: { children: React.ReactNode }) => {
   const [falando, setFalando] = useState(false);
   const [historico, setHistorico] = useState<Mensagem[]>([]);
+
+  useEffect(() => {
+    if (falando) {
+      const audio = new Audio("/assets/audios/quack-sound.mp3");
+      audio.play();
+    }
+  }, [falando]);
 
   return (
     <QuackContext.Provider value={{ falando, setFalando, historico, setHistorico }}>
