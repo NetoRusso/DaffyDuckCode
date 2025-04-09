@@ -7,6 +7,7 @@ export default function Home() {
     <>
       <Background />
       <Main />
+      <div style={{ height: "10px"}} />
     </>
   );
 }
