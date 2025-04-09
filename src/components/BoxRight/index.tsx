@@ -22,9 +22,11 @@ const BoxRight = () => {
             <p className={style.box__content__result_pergunta}>
               <strong>Você:<br /></strong>{item.pergunta}
             </p>
-            <ReactMarkdown className={style.box__content__result_resposta}>
-            {`**IA:**\n\n${item.resposta}`}
-            </ReactMarkdown>
+            <div className={style.box__content__result_resposta}>
+              <ReactMarkdown>
+                {`**IA:**\n\n${item.resposta}`}
+              </ReactMarkdown>
+            </div>
           </div>
         ))}
         <div ref={bottomRef} />
